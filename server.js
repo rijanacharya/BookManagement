@@ -1,15 +1,49 @@
-// app.js
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+const multer = require('multer');
+const ejs = require('ejs');
 
-// Load the built-in 'http' module
-const http = require('http');
+const app = express();
+const port = process.env.PORT || 3000;
 
-// Create an HTTP server that responds with "Hello, World!" to all requests
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello, World!\n');
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/bookstore', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+
+// Handle MongoDB connection error
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
 });
 
-// Listen on port 3000 and IP address 127.0.0.1
-server.listen(3000, '127.0.0.1', () => {
-    console.log('Server running at http://127.0.0.1:3000/');
+
+
+// Set up middleware
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.set('view engine', 'ejs'); // Set EJS as the view engine
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+
+
+  app.get('/books/add', (req, res) => {
+    res.sendFile(__dirname + '/views/bookForm.html');
+  });
+
+
+// Routes
+const bookRoutes = require('./routes/routes')(upload);
+app.use('/books', bookRoutes); // Assuming your routes are prefixed with '/books'
+
+
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
