@@ -1,0 +1,56 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  height: 15vh;
+  background-color: #333;
+  text-align: center;
+  padding: 20px;
+}
+
+.header h1 {
+  font-size: 50px;
+  color: #fff;
+}
+
+.main-content {
+  background-image: url("/Img/Book.jpeg");
+  flex: 1;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px; /* Adjust padding as needed */
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+#inventoryList {
+  font-size: larger;
+  font-weight: bolder;
+  margin-left: 65vh;
+  width: 50vh;
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
