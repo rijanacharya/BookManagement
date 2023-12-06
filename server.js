@@ -2,6 +2,14 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const store = new MongoDBStore({
+    uri: 'mongodb://localhost:27017/bookstore',
+    collection: 'sessions',
+});
+
 
 const ejs = require('ejs');
 const multer = require('multer');
@@ -24,6 +32,21 @@ db.once('open', () => {
 });
 
 
+// Set up session
+
+
+app.use(
+    session({
+        secret: 'your-secret-key',
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, // 1 day
+        },
+    })
+);
+
 
 // Set up middleware
 
@@ -42,9 +65,9 @@ const combinedRoutes = require('./routes/login')(upload);
 app.use('/', combinedRoutes); // Use the combined routes
 
 
-app.get('/admin/books/add', (req, res) => {
-    res.sendFile(__dirname + '/views/bookForm.html');
-});
+// app.get('/admin/books/add', (req, res) => {
+//     res.sendFile(__dirname + '/views/bookForm.html');
+// });
 
 
 // Routes
