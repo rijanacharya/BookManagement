@@ -5,12 +5,16 @@ const path = require('path');
 const multer = require('multer');
 const ejs = require('ejs');
 
+
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/bookstore', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
+
+
 
 // Handle MongoDB connection error
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -24,23 +28,28 @@ db.once('open', () => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
 
-app.set('view engine', 'ejs'); // Set EJS as the view engine
+
+app.set('view engine', 'ejs'); // Change 'ejs' to your actual view engine if different
+app.set('views', path.join(__dirname, 'views'));
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 
 
-  app.get('/books/add', (req, res) => {
+  app.get('/admin/books/add', (req, res) => {
     res.sendFile(__dirname + '/views/bookForm.html');
   });
 
 
 // Routes
-const bookRoutes = require('./routes/routes')(upload);
-app.use('/books', bookRoutes); // Assuming your routes are prefixed with '/books'
+const bookRoutes = require('./routes/adminbookroutes')(upload);
+app.use('/admin/books', bookRoutes); 
 
+const displaybook = require('./routes/displayBook');
+app.use('/books', displaybook); 
 
 
 // Start the server

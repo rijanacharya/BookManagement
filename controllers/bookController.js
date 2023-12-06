@@ -1,5 +1,11 @@
 const Book = require('../models/book');
-const fs = require('fs').promises;
+const Review=require('../models/reviews')
+const Customer=require('../models/customer')
+const fs = require('fs');
+const express = require('express');
+const multer = require('multer'); // For handling file uploads
+const router = express.Router();
+const path = require('path');
 
 
 // Display list of all books
@@ -21,29 +27,43 @@ exports.index =async function (req, res) {
       <body>
           <div class="container">
               <h1 class="mt-5 mb-4">Book List</h1>
-              <a href="/books/add" class="btn btn-primary mb-3">Add New Book</a>
+              <a href="/admin/books/add" class="btn btn-primary mb-3">Add New Book</a>
               <ul class="list-group">
                   ${books.map(book => `
                       <li class="list-group-item">
                           <h2>${book.title}</h2>
                           <p>Author: ${book.author}</p>
+                          <p>Details: ${book.details}
                           <p>Genre: ${book.genre}</p>
                           <p>Quantity: ${book.quantity}</p>
                           <p>Price: ${book.price}</p>
                           <p>Published Date: ${book.publishedDate}</p>
                           <p>Publisher: ${book.publisher}</p>
-                          <p>Reviews: ${book.reviews.join(', ')}</p>
+                      
                           ${book.image ? `<img src="data:${book.image.contentType};base64,${book.image.data}" alt="Book Image" style="max-width: 100px; max-height: 100px;">` : ''}
-                      </li>
+                          <button class="btn btn-info" onclick="editBook('${book._id}')">Edit</button>
+                          <button class="btn btn-info" onclick="deleteBook('${book._id}')">Delete</button>
+
+                          </li>
                   `).join('')}
               </ul>
-              <a href="/books/add" class="btn btn-primary">Add Book</a>
           </div>
 
           <!-- Include Bootstrap JS (optional) -->
           <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
           <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+          <script>
+              function editBook(bookId) {
+                  // You can redirect to the edit page with the bookId or perform other actions
+                  window.location.href = '/admin/books/edit/' + bookId;
+              }
+              function deleteBook(bookId) {
+                // You can redirect to the edit page with the bookId or perform other actions
+                window.location.href = '/admin/books/delete/' + bookId;
+            }
+          </script>
       </body>
       </html>
   `;
@@ -66,20 +86,20 @@ exports.addForm = function (req, res) {
 exports.addBook = async function (req, res) {
     
   try {
-    const { title, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
+    const { title,details, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
     const { fieldname, originalname, encoding, mimetype, buffer, size } = req.file;
     const base64Image = buffer.toString('base64');
 
    
     const newBook = new Book({
       title,
+      details,
       author,
       genre,
       quantity,
       price,
       publishedDate,
       publisher,
-      reviews: reviews ? reviews.split(',') : [],
       image: {
         data: base64Image,
         contentType: mimetype,
@@ -90,7 +110,7 @@ exports.addBook = async function (req, res) {
     // Save the new book to the database
     await newBook.save();
     
-    res.redirect('/books'); // Redirect to the book list page
+    res.redirect('/admin/books'); // Redirect to the book list page
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
@@ -106,7 +126,12 @@ exports.editForm = async function (req, res) {
     if (!book) {
       res.status(404).send('Book not found');
     } else {
-      res.render('editBookForm', { title: 'Edit Book', book });
+      const filePath = path.join(__dirname, '../views', 'editBookForm.html');
+      const formHtml = fs.readFileSync(filePath, 'utf8').replace('BOOK_ID', bookId);
+
+
+        // Send the HTML file directly
+        res.send(formHtml);;
     }
   } catch (err) {
     console.error(err);
@@ -118,21 +143,28 @@ exports.editForm = async function (req, res) {
 exports.editBook = async function (req, res) {
   try {
     const bookId = req.params.id;
-    const { title, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
+    const { title,details, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
+    const { fieldname, originalname, encoding, mimetype, buffer, size } = req.file;
+    const base64Image = buffer.toString('base64');
 
     // Update the book in the database
     await Book.findByIdAndUpdate(bookId, {
       title,
+      details,
       author,
       genre,
       quantity,
       price,
       publishedDate,
       publisher,
-      reviews: reviews ? reviews.split(',') : [],
+
+      image: {
+        data: base64Image,
+        contentType: mimetype,
+      },
     });
 
-    res.redirect('/books'); // Redirect to the book list page
+    res.redirect('/admin/books'); // Redirect to the book list page
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
@@ -147,7 +179,7 @@ exports.deleteBook = async function (req, res) {
     // Delete the book from the database
     await Book.findByIdAndRemove(bookId);
 
-    res.redirect('/books'); // Redirect to the book list page
+    res.redirect('/admin/books'); // Redirect to the book list page
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
