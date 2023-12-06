@@ -1,15 +1,58 @@
-// app.js
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const path = require('path');
+const multer = require('multer');
+const ejs = require('ejs');
 
-// Load the built-in 'http' module
-const http = require('http');
 
-// Create an HTTP server that responds with "Hello, World!" to all requests
-const server = http.createServer((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('Hello, World!\n');
+
+const app = express();
+const port = process.env.PORT || 3000;
+
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/bookstore', { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+
+
+
+// Handle MongoDB connection error
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
 });
 
-// Listen on port 3000 and IP address 127.0.0.1
-server.listen(3000, '127.0.0.1', () => {
-    console.log('Server running at http://127.0.0.1:3000/');
+
+
+// Set up middleware
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
+
+
+app.set('view engine', 'ejs'); // Change 'ejs' to your actual view engine if different
+app.set('views', path.join(__dirname, 'views'));
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+
+
+  app.get('/admin/books/add', (req, res) => {
+    res.sendFile(__dirname + '/views/bookForm.html');
+  });
+
+
+// Routes
+const bookRoutes = require('./routes/adminbookroutes')(upload);
+app.use('/admin/books', bookRoutes); 
+
+const displaybook = require('./routes/displayBook');
+app.use('/books', displaybook); 
+
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
