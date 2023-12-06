@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const ejs = require('ejs');
+const multer = require('multer');
+const upload = multer({ dest: './uploads' }); // Specify the destination folder for uploaded files
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -26,7 +28,7 @@ app.set('view engine', 'ejs'); // Set EJS as the view engine
 
 
 // Import combined routes
-const combinedRoutes = require('./routes/routes')(upload);
+const combinedRoutes = require('./routes/login')(upload);
 app.use('/', combinedRoutes); // Use the combined routes
 
 // Start the server
