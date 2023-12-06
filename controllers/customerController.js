@@ -16,7 +16,7 @@ exports.loginForm = (req, res) => {
 // Handle customer registration
 exports.register = async (req, res) => {
   try {
-    const { username, password, email } = req.body;    
+    const { username, password, email } = req.body;
 
     // Assuming 'customer' is the hardcoded role for customer accounts
     const role = 'customer';
@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
     if (!customer) {
 
       return res.status(401).json({ message: 'Invalid username or password' });
-    }    
+    }
     console.log('Retrieved hashed password:', customer.password);
     const isValidPassword = password === customer.password;
 
@@ -49,7 +49,9 @@ exports.login = async (req, res) => {
     }
 
     // Store the user's role in the session
-   // req.session.role = customer.role;
+    // req.session.role = customer.role;
+    req.session.username = username;
+
 
     if (customer.role === 'admin') {
       res.status(200).json({ message: 'Admin login successful' });
@@ -62,4 +64,17 @@ exports.login = async (req, res) => {
     console.error('Error in login endpoint:', error);
     res.status(500).json({ error: error.message });
   }
+};
+
+// Handle customer logout
+exports.logout = (req, res) => {
+  // Destroy the session to log the user out
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error in logout endpoint:', err);
+      return res.status(500).json({ error: 'Internal Server Error' });
+    }
+    // Redirect the user to the login page after logout
+    res.redirect('/login');
+  });
 };
