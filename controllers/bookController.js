@@ -1,6 +1,6 @@
 const Book = require('../models/book');
-const Review=require('../models/reviews')
-const Customer=require('../models/customer')
+const Review = require('../models/reviews')
+const Customer = require('../models/customer')
 const fs = require('fs');
 const express = require('express');
 const multer = require('multer'); // For handling file uploads
@@ -9,12 +9,12 @@ const path = require('path');
 
 
 // Display list of all books
-exports.index =async function (req, res) {
-    try {
-        // Fetch the book data, for example using Book.find({}...)
-        const books = await Book.find({});
-        
-        const htmlContent = `
+exports.index = async function (req, res) {
+  try {
+    // Fetch the book data, for example using Book.find({}...)
+    const books = await Book.find({});
+
+    const htmlContent = `
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -71,10 +71,10 @@ exports.index =async function (req, res) {
     res.setHeader('Content-Type', 'text/html');
     res.status(200).send(htmlContent);
 
-      } catch (error) {
-        console.error('Error fetching book data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
-      }
+  } catch (error) {
+    console.error('Error fetching book data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 };
 
 // Display book create form on GET
@@ -84,13 +84,13 @@ exports.addForm = function (req, res) {
 
 // Handle book create on POST
 exports.addBook = async function (req, res) {
-    
+
   try {
-    const { title,details, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
+    const { title, details, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
     const { fieldname, originalname, encoding, mimetype, buffer, size } = req.file;
     const base64Image = buffer.toString('base64');
 
-   
+
     const newBook = new Book({
       title,
       details,
@@ -105,11 +105,11 @@ exports.addBook = async function (req, res) {
         contentType: mimetype,
       },
     });
-    
+
 
     // Save the new book to the database
     await newBook.save();
-    
+
     res.redirect('/admin/books'); // Redirect to the book list page
   } catch (err) {
     console.error(err);
@@ -130,8 +130,8 @@ exports.editForm = async function (req, res) {
       const formHtml = fs.readFileSync(filePath, 'utf8').replace('BOOK_ID', bookId);
 
 
-        // Send the HTML file directly
-        res.send(formHtml);;
+      // Send the HTML file directly
+      res.send(formHtml);;
     }
   } catch (err) {
     console.error(err);
@@ -143,7 +143,7 @@ exports.editForm = async function (req, res) {
 exports.editBook = async function (req, res) {
   try {
     const bookId = req.params.id;
-    const { title,details, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
+    const { title, details, author, genre, quantity, price, publishedDate, publisher, reviews } = req.body;
     const { fieldname, originalname, encoding, mimetype, buffer, size } = req.file;
     const base64Image = buffer.toString('base64');
 
