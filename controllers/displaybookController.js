@@ -38,7 +38,9 @@ async function displayBookDetail(req, res) {
     });
 
     // Render a view with the detailed information for the specific book
+
     res.render('eachBook', { book });
+
   } catch (error) {
     // Handle errors and send an appropriate response
     console.error(error);
@@ -77,8 +79,30 @@ async function postBookReview(req, res) {
   }
 }
 
+
+//   // Handle book search
+
+async function searchBooks(req, res) {
+  try {
+    const { searchTerm } = req.query;
+    console.log('Received search term:', searchTerm);
+
+    // Assuming your Book model is called Book and has a 'title' field
+    const books = await Book.find({ title: { $regex: new RegExp(searchTerm, 'i') } });
+
+
+    res.status(200).json({ results: books });
+  } catch (error) {
+    console.error('Error in searchBooks endpoint:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+
+
 module.exports = {
   displayAllBooks,
   displayBookDetail,
   postBookReview,
+  searchBooks,
 };
