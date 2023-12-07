@@ -2,15 +2,24 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
-const multer = require('multer');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+
+const store = new MongoDBStore({
+    uri: 'mongodb://localhost:27017/bookstore',
+    collection: 'sessions',
+});
+
+
 const ejs = require('ejs');
-
-
+const multer = require('multer');
+// const upload = multer({ dest: './uploads' }); // Specify the destination folder for uploaded files
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 // Connect to MongoDB
+
 mongoose.connect('mongodb://localhost:27017/bookstore', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
@@ -19,9 +28,24 @@ const db = mongoose.connection;
 // Handle MongoDB connection error
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
-  console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB');
 });
 
+
+// Set up session
+
+
+app.use(
+    session({
+        secret: 'your-secret-key',
+        resave: false,
+        saveUninitialized: false,
+        store: store,
+        cookie: {
+            maxAge: 1000 * 60 * 60 * 24, // 1 day
+        },
+    })
+);
 
 
 // Set up middleware
@@ -37,22 +61,24 @@ app.set('views', path.join(__dirname, 'views'));
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
+const combinedRoutes = require('./routes/login')(upload);
+app.use('/', combinedRoutes); // Use the combined routes
 
 
-  app.get('/admin/books/add', (req, res) => {
-    res.sendFile(__dirname + '/views/bookForm.html');
-  });
+// app.get('/admin/books/add', (req, res) => {
+//     res.sendFile(__dirname + '/views/bookForm.html');
+// });
 
 
 // Routes
 const bookRoutes = require('./routes/adminbookroutes')(upload);
-app.use('/admin/books', bookRoutes); 
+app.use('/admin/books', bookRoutes);
 
 const displaybook = require('./routes/displayBook');
-app.use('/books', displaybook); 
+app.use('/books', displaybook);
 
 
 // Start the server
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
