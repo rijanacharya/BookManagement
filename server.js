@@ -64,7 +64,9 @@ const upload = multer({ storage: storage });
 const combinedRoutes = require('./routes/login')(upload);
 app.use('/', combinedRoutes); // Use the combined routes
 
-
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html');
+});
 // app.get('/admin/books/add', (req, res) => {
 //     res.sendFile(__dirname + '/views/bookForm.html');
 // });
