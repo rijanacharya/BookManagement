@@ -64,8 +64,9 @@
                     onclick="handleCartClick()"></i>
                 </a>
                 <!--Search-->
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <form class="d-flex" onsubmit="searchBooks(event)">
+                    <input id="searchTerm" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search" />
                     <button class="btn btn-outline-success" type="submit">
                         Search
                     </button>
@@ -192,6 +193,7 @@
     <script src="/script/hero_animation.js"></script>
     <script src="/script/carousel.js"></script>
     <script src="/script/toTop.js"></script>
+    <script src="/script/search.js"></script>
     <script>
         function navigateToBookDetail(bookId) {
             window.location.href = `/books/${bookId}`;

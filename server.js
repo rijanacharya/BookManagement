@@ -53,7 +53,10 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
-
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 
 app.set('view engine', 'ejs'); // Change 'ejs' to your actual view engine if different
 app.set('views', path.join(__dirname, 'views'));
@@ -65,7 +68,7 @@ const combinedRoutes = require('./routes/login')(upload);
 app.use('/', combinedRoutes); // Use the combined routes
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(__dirname + '/views/index.html', { session: req.session });
 });
 // app.get('/admin/books/add', (req, res) => {
 //     res.sendFile(__dirname + '/views/bookForm.html');
@@ -82,5 +85,5 @@ app.use('/books', displaybook);
 
 // Start the server
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on  http://localhost:${port}`);
 });

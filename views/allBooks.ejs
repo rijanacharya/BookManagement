@@ -25,7 +25,7 @@
     <ul class="list-unstyled d-flex flex-wrap" id="bookList">
       <!-- Books will be dynamically added here -->
       <% books.forEach(book=> { %>
-        <<<<<<< HEAD <li class="m-2">
+        <li class="m-2">
           <div class="card" style="height: fit-content; width: fit-content;">
             <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>" alt="<%= book.title %>"
               class="card-img-top" style="cursor: pointer; height: 150px;"
@@ -43,8 +43,8 @@
                   <% } %>
             </div>
           </div>
-          </li>
-          <% }); %>
+        </li>
+        <% }); %>
     </ul>
   </div>
 

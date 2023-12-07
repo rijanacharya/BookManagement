@@ -8,8 +8,6 @@
     <!-- Bootstrap CSS -->
     <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/style/menu.css" />
-    <link rel="stylesheet" type="text/css" href="/style/heroimage.css" />
-    <link rel="stylesheet" type="text/css" href="/style/caraousel.css" />
     <link rel="stylesheet" type="text/css" href="/style/faq.css" />
     <link rel="stylesheet" type="text/css" href="/style/contact.css" />
     <link rel="stylesheet" type="text/css" href="/style/toTop.css" />
@@ -63,13 +61,31 @@
                 <i class="bi bi-cart3 fa-4x" data-bs-toggle="modal" data-bs-target="#loginModal"
                     onclick="handleCartClick()"></i>
                 </a>
+
                 <!--Search-->
-                <form class="d-flex" role="search" onsubmit="searchBooks()">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <form class="d-flex" onsubmit="searchBooks(event)">
+                    <input id="searchTerm" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search" />
                     <button class="btn btn-outline-success" type="submit">
                         Search
                     </button>
                 </form>
+                <!-- Login/Logout Button -->
+                <div class="d-flex1">
+                    <% console.log('session:', locals.session); %>
+                        <% if (locals.session && locals.session.username) { %>
+                            <!-- User is logged in -->
+                            <button id="logout-btn" class="btn btn-outline-danger mx-2"
+                                onclick="logout()">Logout</button>
+                            <% } else { %>
+                                <!-- User is not logged in -->
+                                <a href="/login" class="btn btn-outline-success mx-2">Login</a>
+                                <% } %>
+
+
+                </div>
+
+
 
             </div>
         </div>
@@ -130,15 +146,30 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
     <script src="/script/menu.js"></script>
     <script src="/script/darkmode.js"></script>
-    <script src="/script/hero_animation.js"></script>
-    <script src="/script/carousel.js"></script>
     <script src="/script/toTop.js"></script>
+    <script src="/script/search.js"></script>
     <!-- <script src="/script/search.js"></script> -->
     <script>
         function navigateToBookDetail(bookId) {
             window.location.href = `/books/${bookId}`;
         }
 
+        function logout() {
+            fetch('/logout')
+                .then(response => {
+                    if (response.ok) {
+                        // Update the UI to reflect that the user is now logged out
+                        document.querySelector('.d-flex1').innerHTML = `
+                        <a href="/login" class="btn btn-outline-success mx-2">Login</a>
+
+                    `;
+                        document.getElementById('logout-btn').style.display = 'none';
+                    } else {
+                        console.error('Error during logout:', response.statusText);
+                    }
+                })
+                .catch(error => console.error('Error during logout:', error));
+        }
 
     </script>
 </body>

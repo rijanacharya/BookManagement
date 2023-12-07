@@ -56,7 +56,8 @@ exports.login = async (req, res) => {
     if (customer.role === 'admin') {
       res.status(200).json({ message: 'Admin login successful' });
     } else if (customer.role === 'customer') {
-      res.status(200).json({ message: 'Customer login successful' });
+      res.redirect('/books');
+      // res.status(200).json({ message: 'Customer login successful' });
     } else {
       res.status(401).json({ message: 'Invalid role' });
     }
