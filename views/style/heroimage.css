@@ -1,0 +1,73 @@
+.jumbotron {
+  padding-left: 15px; /* Adjust the left padding as needed */
+  background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)),
+    url("../images/book_background.jpeg");
+  background-size: cover;
+  background-position: center;
+  color: #fff; /* Set text color to contrast with the background */
+  text-align: center;
+  height: 70vh;
+  margin: 0;
+}
+
+.hero-content {
+  padding: 20vh 0;
+}
+
+.hero-content h1 {
+  font-weight: 500;
+}
+
+.hero-content p {
+  font-size: 2rem;
+}
+
+/* Custom style for the Explore button */
+.explore-btn {
+  border: 2px solid #fff; /* White border */
+  border-radius: 50px; /* Border radius */
+  padding: 1rem 1rem;
+  text-transform: uppercase;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out; /* Smooth transition effect */
+}
+
+/* Hover effect for the Explore button */
+.explore-btn:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.05); /* Increase size on hover */
+}
+/* books image css*/
+.booksimage {
+  max-width: 100%;
+  padding-top: 5rem;
+}
+
+/* for animation */
+.hero-content,
+.hero-image {
+  opacity: 0; /* Set initial opacity to 0 */
+  transform: translateY(20px); /* Set initial translation for content */
+  transition: opacity 3s, transform 3s; /* Add transitions */
+}
+
+.hero-image {
+  transform: translateX(20px); /* Set initial translation for image */
+}
+
+.hero-content.animate,
+.hero-image.animate {
+  opacity: 1; /* Set final opacity to 1 */
+  transform: translateY(0); /* Set final translation for content */
+}
+
+.hero-image.animate {
+  transform: translateX(0); /* Set final translation for image */
+}
+
+@media (max-width: 750px) {
+  .booksimage {
+    display: none;
+  }
+}

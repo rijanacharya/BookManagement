@@ -1,0 +1,16 @@
+.faqs {
+  height: 28vh;
+}
+.faqs h1 {
+  margin-bottom: 30px;
+}
+
+/* Remove outline focus */
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: inherit;
+  color: inherit;
+}

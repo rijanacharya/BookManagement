@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite Pages</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style/menu.css" />
+    <link rel="stylesheet" href="style/heroimage.css" />
+    <link rel="stylesheet" href="style/caraousel.css" />
+    <link rel="stylesheet" href="style/faq.css" />
+    <link rel="stylesheet" href="style/contact.css" />
+    <link rel="stylesheet" href="style/toTop.css" />
+  </head>
+
+  <body data-bs-theme="dark">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+      <div class="container-fluid navBar">
+        <a class="navbar-brand text-uppercase fa-5x" href="#"  >
+          <i class="bi bi-infinity fa-5x"></i>Pages</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <!-- Custom hamburger menu icon with animation -->
+          <div id="hamburger-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto pl-4 pr-4 mb-2 mb-lg-0 text-uppercase">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/bookecommerceplain/products.html">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#bestseller">Best Seller</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#faqs">FAQ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Contact</a>
+            </li>
+          </ul>
+          <!--Toggle button-->
+            <div class="form-check form-switch mx-4">
+              <i id="sunIcon" class="bi bi-sun" style="display: none;"></i>
+              <input
+                type="checkbox"
+                class="form-check-input p-2"
+                role="switch"
+                id="flexSwitchCheckChecked"
+                checked
+                onclick="darkMode()"
+              />
+              <i id="moonIcon" class="bi bi-moon" ></i>
+            </div>
+            <!--Cart-->
+          <a class="icon-link " href="#" ></a>
+            <i class="bi bi-cart3 fa-4x" data-bs-toggle="modal" data-bs-target="#loginModal" onclick="handleCartClick()"></i>
+          </a>
+          <!--Search-->
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="jumbotron" id="home">
+        <!-- Left-aligned content -->
+        <div class="row">
+          <!-- Left-aligned content -->
+          <div class="col-md-6 hero-content">
+            <h1 class="display-4 text-uppercase ">Dive into a World of Endless Stories</h1>
+            <p>Explore a vast collection of books and discover your next read.</p>
+            <a href="#" class="btn btn-primary explore-btn">Explore More</a>
+          </div>
+    
+          <!-- Right-aligned static image -->
+          <div class="col-md-6 hero-image">
+            <img src="images/books.jpeg" alt="books_image" class="img-fluid booksimage">
+          </div>>
+          </div>
+      </div>
+    </div>
+
+<!-- BestSelling Books -->
+    <div class="container mt-5" id="bestseller">
+      <h1 class="text-uppercase text-center">Bestselling Books</h1>
+      <!-- carousel -->
+      <div id="books_bestseller" class="carousel">
+        <div class="carousel-inner">
+          <!-- If you want to add code dynamically you can do it here -->
+          <!-- <% books.forEach((book, index) => { %>
+            <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+              <img src="/<%= book.image %>" class="d-block w-100" alt="<%= book.title %>">
+              <div class="carousel-caption d-none d-md-block">
+                <h5><%= book.title %></h5>
+                <p><%= book.description %></p>
+              </div>
+            </div>
+          <% }); %> -->
+          <div class="carousel-item active">
+            <div class="card">
+              <div class="image-wrapper">
+                <img src="images/Ikegai.jpg" alt="Book Image">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Book Title</h5>
+                <p class="card-text">Author: Author Name</p>
+                <p class="card-text">Price: $19.99</p>
+                <a href="#" class="btn btn-primary explore-btn">Buy Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <div class="image-wrapper">
+              <img src="images/John.jpg" alt="Book Image">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Book Title</h5>
+                <p class="card-text">Author: Author Name</p>
+                <p class="card-text">Price: $19.99</p>
+                <a href="#" class="btn btn-primary explore-btn">Buy Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <div class="image-wrapper">
+              <img src="images/Bittlemores.jpg" alt="Book Image">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Book Title</h5>
+                <p class="card-text">Author: Author Name</p>
+                <p class="card-text">Price: $19.99</p>
+                <a href="#" class="btn btn-primary explore-btn">Buy Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <div class="image-wrapper">
+              <img src="images/TSAONGF.jpg" alt="Book Image">
+              </div>
+
+              <div class="card-body">
+                <h5 class="card-title">Book Title</h5>
+                <p class="card-text">Author: Author Name</p>
+                <p class="card-text">Price: $19.99</p>
+                <a href="#" class="btn btn-primary explore-btn">Buy Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card">
+              <div class="image-wrapper">
+              <img src="images/The Midwife.jpg" alt="Book Image">
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Book Title</h5>
+                <p class="card-text">Author: Author Name</p>
+                <p class="card-text">Price: $19.99</p>
+                <a href="#" class="btn btn-primary explore-btn">Buy Now</a>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+      
+
+
+    <!-- FAQ Section -->
+    <div class="container mt-5 faqs" id="faqs">
+      <h1 class="text-uppercase text-center ">faq</h1>
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              What books do we have to offer?
+            </button>
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Do you want a refund? Process below
+            </button>
+          </h2>
+          <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              How long will the process take?
+            </button>
+          </h2>
+          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Contact Page -->
+    <div class="container mt-5 contact" id="contact">
+      <h2 class="text-center mb-4 text-uppercase">Contact Us</h2>
+    
+      <div class="row">
+        <!-- Contact Form -->
+        <div class="col-md-12 ">
+          <form action="#" method="post" class="p-5">
+            <div class="form-group">
+              <label for="name" >Name:</label>
+              <input type="text" class="form-control mt-2 mb-2" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" class="form-control mt-2 mb-2" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="comment">Comment:</label>
+              <textarea class="form-control mt-2 mb-2" id="comment" name="comment" rows="4" style="resize: none;" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary explore-btn mt-2 mb-2">Submit</button>
+          </form>
+        </div>
+      <!-- Map Section -->
+      <div class="col-md-12">
+        <div class="embed-responsive embed-responsive-16by9">
+          <!-- Replace the URL with the actual embedded map URL -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2883.89341718107!2d-79.2728856!3d43.712764!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4ce667bbdb043%3A0x3ca213c00f0cd49c!2s58%20Elfreda%20Blvd%2C%20Scarborough%2C%20ON%20M1L%204L8!5e0!3m2!1sen!2sca!4v1701852147875!5m2!1sen!2sca" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" class="toTop-btn" title="Go to top">
+    <i class="bi bi-airplane"></i>
+  </button>
+
+    <!-- Footer -->
+    <footer class="text-center py-3">
+      &copy; 2023 Infinite Pages. All rights reserved.
+    </footer>
+
+<!-- Modal for Login/Signup -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login or Sign Up</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Your login or signup form goes here -->
+        <!-- Example form -->
+        <form id="loginform" action="#">
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <!-- Add your form fields for signup as needed -->
+          <button type="submit" class="btn btn-primary">Login</button>
+          <a href="signup.html" class="btn btn-success">Sign Up</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Bootstrap JS (Make sure to include jQuery and Popper.js before Bootstrap JS) -->
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="script/menu.js"></script>
+    <script src="script/darkmode.js"></script>
+    <script src="script/hero_animation.js"></script>
+    <script src="script/carousel.js"></script> 
+    <script src="script/toTop.js"></script> 
+  </body>
+</html>

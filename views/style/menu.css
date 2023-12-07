@@ -1,0 +1,93 @@
+/*bootstrap icons*/
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css");
+
+.navBar {
+  padding: 0 5rem;
+}
+li {
+  padding: 0 1rem;
+}
+
+/* Custom hamburger menu styles */
+.navbar-toggler {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 4px;
+  position: relative;
+  transition: background-color 0.3s;
+  outline: none;
+}
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+/* Hamburger lines */
+.navbar-toggler div {
+  border-radius: 50px;
+  height: 4px;
+  width: 30px;
+  position: absolute;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+body[data-bs-theme="dark"] .navbar-toggler div:nth-child(1) {
+  background-color: #fff;
+  top: 0;
+}
+
+body[data-bs-theme="dark"] .navbar-toggler div:nth-child(2) {
+  background-color: #fff;
+  top: 10px;
+}
+
+body[data-bs-theme="dark"] .navbar-toggler div:nth-child(3) {
+  background-color: #fff;
+  top: 20px;
+}
+
+body[data-bs-theme="light"] .navbar-toggler div:nth-child(1) {
+  background-color: #333;
+  top: 0;
+}
+
+body[data-bs-theme="light"] .navbar-toggler div:nth-child(2) {
+  background-color: #333;
+  top: 10px;
+}
+
+body[data-bs-theme="light"] .navbar-toggler div:nth-child(3) {
+  background-color: #333;
+  top: 20px;
+}
+
+/* Cross animation when clicked */
+.navbar-toggler.active div:nth-child(1) {
+  transform: translateY(10px) rotate(-45deg);
+}
+
+.navbar-toggler.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar-toggler.active div:nth-child(3) {
+  transform: translateY(-10px) rotate(45deg);
+}
+/* Custom style to hide the menu by default */
+.navbar-collapse {
+  display: none;
+  transition: max-height 5s ease-out;
+}
+
+/* Custom style to show the menu when the "show" class is present */
+.navbar-collapse.show {
+  display: block;
+  max-height: 100vh;
+  transition: max-height 5s ease-in;
+}
+
+i {
+  margin-right: 1rem;
+}
