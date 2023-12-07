@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Infinite Pages</title>
+    <!-- Bootstrap CSS -->
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/style/menu.css" />
+    <link rel="stylesheet" type="text/css" href="/style/heroimage.css" />
+    <link rel="stylesheet" type="text/css" href="/style/caraousel.css" />
+    <link rel="stylesheet" type="text/css" href="/style/faq.css" />
+    <link rel="stylesheet" type="text/css" href="/style/contact.css" />
+    <link rel="stylesheet" type="text/css" href="/style/toTop.css" />
+</head>
+
+<body data-bs-theme="dark">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid navBar">
+            <a class="navbar-brand text-uppercase fa-5x" href="#">
+                <i class="bi bi-infinity fa-5x"></i>Pages</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Custom hamburger menu icon with animation -->
+                <div id="hamburger-menu">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto pl-4 pr-4 mb-2 mb-lg-0 text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/bookecommerceplain/products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bestseller">Best Seller</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#faqs">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <!--Toggle button-->
+                <div class="form-check form-switch mx-4">
+                    <i id="sunIcon" class="bi bi-sun" style="display: none;"></i>
+                    <input type="checkbox" class="form-check-input p-2" role="switch" id="flexSwitchCheckChecked"
+                        checked onclick="darkMode()" />
+                    <i id="moonIcon" class="bi bi-moon"></i>
+                </div>
+                <!--Cart-->
+                <a class="icon-link " href="#"></a>
+                <i class="bi bi-cart3 fa-4x" data-bs-toggle="modal" data-bs-target="#loginModal"
+                    onclick="handleCartClick()"></i>
+                </a>
+                <!--Search-->
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- BestSelling Books -->
+    <div class="container mt-5" id="bestseller">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>" alt="<%= book.title %>"
+                        class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <div class="book-details">
+                        <h1>
+                            <%= book.title %>
+                        </h1>
+                        <p><strong>Author:</strong>
+                            <%= book.author %>
+                        </p>
+                        <p><strong>Details:</strong>
+                            <%= book.details %>
+                        </p>
+                        <p><strong>Genre:</strong>
+                            <%= book.genre %>
+                        </p>
+                        <p><strong>Price:</strong> $<%= book.price.toFixed(2) %>
+                        </p>
+                        <p><strong>Published Date:</strong>
+                            <%= book.publishedDate %>
+                        </p>
+                        <p><strong>Publisher:</strong>
+                            <%= book.publisher %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add to Cart button -->
+            <div class="button-container">
+                <% if (book.quantity> 0) { %>
+                    <button type="button" class="btn btn-success">
+                        Add to Cart
+                    </button>
+                    <% if (book.quantity < 5) { %>
+                        <span class="badge badge-warning">Hurry!! Only <%= book.quantity %> book left in stock.</span>
+                        <% } %>
+                            <% } else { %>
+                                <% if (book.quantity> -5) { %>
+                                    <span class="badge badge-danger">Not avaliable! Check back later.</span>
+                                    <button type="button" class="btn btn-success" disabled>
+                                        Add to Cart
+                                    </button>
+                                    <% } else { %>
+                                        <span class="badge badge-danger">Out of stock</span>
+                                        <% } %>
+                                            <% } %>
+            </div>
+
+
+        </div>
+        <div class="container review-section">
+            <!-- Form for posting a new review -->
+            <form action="/books/<%= book._id %>/reviews" method="POST">
+                <div class="form-group">
+                    <label for="reviewContent">Write a Review:</label>
+                    <textarea class="form-control" id="reviewContent" name="content" rows="3" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Post Review</button>
+            </form>
+        </div>
+
+        <!-- Display all reviews in a separate section -->
+        <div class="container review-section">
+            <h2>Reviews</h2>
+            <% book.reviews.forEach(review=> { %>
+                <div class="review-item media">
+                    <img src="/uploads/icon.jpeg" class="user-icon" alt="User Icon">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+                            <%= review.customer.username %>
+                        </h5>
+                        <p>
+                            <%= review.content %>
+                        </p>
+                    </div>
+                </div>
+                <% }); %>
+        </div>
+
+    </div>
+
+
+
+    <!-- FAQ Section -->
+
+    <!-- Contact Page -->
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-btn" class="toTop-btn" title="Go to top">
+        <i class="bi bi-airplane"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="text-center py-3">
+        &copy; 2023 Infinite Pages. All rights reserved.
+    </footer>
+
+    <!-- Modal for Login/Signup -->
+
+
+    <!-- Bootstrap JS (Make sure to include jQuery and Popper.js before Bootstrap JS) -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="/script/menu.js"></script>
+    <script src="/script/darkmode.js"></script>
+    <script src="/script/hero_animation.js"></script>
+    <script src="/script/carousel.js"></script>
+    <script src="/script/toTop.js"></script>
+    <script>
+        function navigateToBookDetail(bookId) {
+            window.location.href = `/books/${bookId}`;
+        }
+    </script>
+</body>
+
+</html>
