@@ -9,15 +9,16 @@ The **bookmanagement** project is a Node.js application for managing books. It p
 Before running the application, make sure you have Node.js and npm installed. Then, follow these steps:
 
 ```bash
-git clone https://github.com/your-username/bookmanagement.git
+git clone https://github.com/rijanacharya/BookManagement.git
 cd bookmanagement
 npm install
-
+```
 
 ##Usage
 To start the application, run the following command:
 ```bash
 npm start
+```
 
 The application will be accessible at http://localhost:3000.
 
