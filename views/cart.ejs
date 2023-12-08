@@ -43,14 +43,8 @@
           <div class="cart-cell"><strong>Price</strong></div>
           <div class="cart-cell"><strong>Quantity</strong></div>
         </div>
-        <% let groupedCart = {} %>
-        <% cart.forEach(book => { %>
-          <% const bookKey = `${book._id}-${book.title}` %>
-          <% groupedCart[bookKey] = groupedCart[bookKey] || { book, quantity: 0 } %>
-          <% groupedCart[bookKey].quantity += 1 %>
-        <% }); %>
         <% let total = 0; %>
-        <% Object.values(groupedCart).forEach(item => { %>
+        <% for (const item of cart) { %>
           <div class="cart-row">
             <div class="cart-cell">
               <img src="data:<%= item.book.image.contentType %>;base64,<%= item.book.image.data %>" alt="<%= item.book.title %>" class="img-thumbnail cart-image">
@@ -66,17 +60,16 @@
               <p><%= item.quantity %></p>
             </div>
           </div>
-        <% }); %>
+        <% } %>
         <div class="cart-row">
           <div class="cart-cell" colspan="3"><strong>Total Price</strong></div>
           <div class="cart-cell" colspan="3"><strong></strong></div>
-
           <div class="cart-cell" colspan="1">$<%= total.toFixed(2) %></div>
         </div>
       </div>
       <div class="cart-row">
         <div class="cart-cell" colspan="4">
-          <form action="/place-order" method="post">
+          <form action="/order/place-order" method="post">
             <button type="submit">Place Order</button>
           </form>
         </div>

@@ -303,8 +303,9 @@
 
         function addtocart(bookId) {
             $.ajax({
+
                 type: 'POST',
-                url: `/addtocart/${bookId}`,
+                url: `/order/addtocart/${bookId}`,
                 success: function (response) {
                     alert(response.message);
                 },
