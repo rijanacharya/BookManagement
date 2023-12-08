@@ -70,9 +70,9 @@ app.use('/', combinedRoutes); // Use the combined routes
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/views/index.html', { session: req.session });
 });
-// app.get('/admin/books/add', (req, res) => {
-//     res.sendFile(__dirname + '/views/bookForm.html');
-// });
+app.get('/admin/books/add', (req, res) => {
+    res.sendFile(__dirname + '/views/bookForm.html');
+});
 
 
 // Routes

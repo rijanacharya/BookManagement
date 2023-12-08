@@ -110,6 +110,9 @@ exports.addBook = async function (req, res) {
     // Save the new book to the database
     await newBook.save();
 
+    const imagePath = path.join(__dirname, '../public/images', `${newBook._id}.${mimetype.split('/')[1]}`);
+    fs.writeFileSync(imagePath, buffer);
+
     res.redirect('/admin/books'); // Redirect to the book list page
   } catch (err) {
     console.error(err);

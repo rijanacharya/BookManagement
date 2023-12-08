@@ -55,11 +55,15 @@ async function postBookReview(req, res) {
     const { content } = req.body;
 
     // Assuming you have a user authentication system and a user ID available
-    const userId = 'your_user_id_here'; // Replace with the actual user ID
+    const userId = req.session.userId; // Replace with the actual user ID
+    console.log(userId);
+    if (!userId) {
+      return res.status(401).send('User not authenticated');
+    }
 
     // Create a new review
     const newReview = new Review({
-      customer: '656f87f76a29999155ff87c7', // Associate the review with the authenticated user
+      customer: userId, // Associate the review with the authenticated user
       book: bookId,
       content,
     });
@@ -90,6 +94,7 @@ async function searchBooks(req, res) {
     // Assuming your Book model is called Book and has a 'title' field
     const books = await Book.find({ title: { $regex: new RegExp(searchTerm, 'i') } });
 
+    
 
     res.status(200).json({ results: books });
   } catch (error) {
