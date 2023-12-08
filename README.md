@@ -24,19 +24,19 @@ The application will be accessible at http://localhost:3000.
 
 
 ## Dependencies
-bcrypt: Library for hashing passwords.
-body-parser: Middleware for handling request bodies.
-connect-mongodb-session: MongoDB session store for Express.
-ejs: Templating engine for generating HTML markup.
-express: Web framework for Node.js.
-express-session: Middleware for managing sessions in Express.
-fs: File system module.
-fs.promises: Promisified version of the file system module.
-mongodb: MongoDB driver for Node.js.
-mongoose: MongoDB object modeling for Node.js.
-multer: Middleware for handling file uploads.
-path: Utility for working with file and directory paths.
+- bcrypt: Library for hashing passwords.
+- body-parser: Middleware for handling request bodies.
+- connect-mongodb-session: MongoDB session store for Express.
+- ejs: Templating engine for generating HTML markup.
+- express: Web framework for Node.js.
+- express-session: Middleware for managing sessions in Express.
+- fs: File system module.
+- fs.promises: Promisified version of the file system module.
+- mongodb: MongoDB driver for Node.js.
+- mongoose: MongoDB object modeling for Node.js.
+- multer: Middleware for handling file uploads.
+- path: Utility for working with file and directory paths.
 
 
 ## License
-This project is licensed under the ISC License.
+- This project is licensed under the ISC License.
