@@ -17,7 +17,7 @@
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid navBar">
-            <a class="navbar-brand text-uppercase fa-5x" href="#">
+            <a class="navbar-brand text-uppercase fa-5x" href="/">
                 <i class="bi bi-infinity fa-5x"></i>Pages</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,22 +31,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto pl-4 pr-4 mb-2 mb-lg-0 text-uppercase">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/bookecommerceplain/products.html">Products</a>
+                        <a class="nav-link" href="/books">Products</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#bestseller">Best Seller</a>
+                        <a class="nav-link" href="/#bestseller">Best Seller</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#faqs">FAQ</a>
+                        <a class="nav-link" href="/#faqs">FAQ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="/#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="/#contact">Contact</a>
                     </li>
                 </ul>
                 <!--Toggle button-->
@@ -100,25 +100,28 @@
                 <li class="m-2">
                     <div class="card" style="height: 350px; width: 200px;">
                         <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>"
-                            alt="<%= book.title %>" class="card-img-top" style="cursor: pointer; height: 70%; object-fit: cover;"
+                            alt="<%= book.title %>" class="card-img-top"
+                            style="cursor: pointer; height: 70%; object-fit: cover;"
                             onclick="navigateToBookDetail('<%= book._id %>')">
                         <div class="card-body" style="height: 30%; overflow-y: auto;">
-                            <h5 class="card-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 10px;">
+                            <h5 class="card-title"
+                                style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 10px;">
                                 <%= book.title %>
                             </h5>
-                            <p class="card-text" style="margin-bottom: 5px;">Price: $<%= book.price.toFixed(2) %></p>
-                            <% if (book.quantity > 0) { %>
+                            <p class="card-text" style="margin-bottom: 5px;">Price: $<%= book.price.toFixed(2) %>
+                            </p>
+                            <% if (book.quantity> 0) { %>
                                 <p class="card-text text-success" style="margin-bottom: 0;">In Stock</p>
-                            <% } else { %>
-                                <p class="card-text text-danger" style="margin-bottom: 0;">Out of Stock</p>
-                            <% } %>
+                                <% } else { %>
+                                    <p class="card-text text-danger" style="margin-bottom: 0;">Out of Stock</p>
+                                    <% } %>
                         </div>
                     </div>
                 </li>
-                
-                
-                                
-                
+
+
+
+
                 <% }); %>
         </ul>
     </div>
@@ -148,10 +151,10 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
     <!-- Include EJS library from CDN -->
-<script src="https://cdn.jsdelivr.net/npm/ejs@3.1.6/dist/ejs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.6/dist/ejs.min.js"></script>
 
-<!-- Your other HTML code -->
-<!-- ... -->
+    <!-- Your other HTML code -->
+    <!-- ... -->
 
     <script src="/script/menu.js"></script>
     <script src="/script/darkmode.js"></script>
