@@ -1,6 +1,7 @@
 // controllers/cartController.js
 const Book = require('../models/book');
 const Cart = require('../models/cart');
+const path = require('path');
 
 exports.addToCart = async (req, res) => {
     const bookId = req.params.bookId;
@@ -89,9 +90,46 @@ exports.placeOrder = async (req, res) => {
         // Clear the cart in the database
         await Cart.updateOne({ userId: req.session.userId }, { $set: { items: [] } });
 
-        res.send('Order placed successfully!');
+        res.sendFile(path.join(__dirname, '../views', 'order-success.html'));
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
+    }
+};
+
+exports.removeFromCart = async (req, res) => {
+    const bookId = req.params.bookId;
+
+    try {
+        // Find the user's cart from the database
+        const cart = await Cart.findOne({ userId: req.session.userId });
+
+        if (!cart) {
+            return res.status(404).json({ error: 'Cart not found' });
+        }
+
+        // Find the index of the item in the cart
+        const itemIndex = cart.items.findIndex(item => item.bookId.toString() === bookId);
+
+        if (itemIndex === -1) {
+            return res.status(404).json({ error: 'Item not found in the cart' });
+        }
+        console.log('cart.items:', cart.items);
+
+        // Remove the item from the cart
+        if (cart.items[itemIndex].quantity > 1) {
+            cart.items[itemIndex].quantity -= 1;
+        } else {
+            // If the quantity is 1 or less, remove the entire item from the cart
+            cart.items.splice(itemIndex, 1);
+        }
+        // Save the updated cart to the database
+        await cart.save();
+
+        res.status(200).json({ message: 'Item removed from the cart successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
 };

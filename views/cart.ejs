@@ -62,9 +62,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/books">Products</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/#bestseller">Best Seller</a>
-          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="/#faqs">FAQ</a>
           </li>
@@ -83,9 +81,8 @@
           <i id="moonIcon" class="bi bi-moon"></i>
         </div>
         <!--Cart-->
-        <a class="icon-link " href="#"></a>
-        <i class="bi bi-cart3 fa-4x" data-bs-toggle="modal" data-bs-target="#loginModal"
-          onclick="handleCartClick()"></i>
+        <a class="icon-link " href="/order/cart">
+          <i class="bi bi-cart3 fa-4x"></i>
         </a>
 
         <!--Search-->
@@ -146,6 +143,9 @@
                 <p>
                   <%= item.quantity %>
                 </p>
+              </div>
+              <div class="cart-cell">
+                <button class="btn btn-danger" onclick="removeFromCart('<%= item.book._id %>')">Remove</button>
               </div>
             </div>
             <% } %>
@@ -223,6 +223,25 @@
         })
         .catch(error => console.error('Error during logout:', error));
     }
+
+
+    // Add a JavaScript function to send a request to remove the item
+    function removeFromCart(bookId) {
+      // You can use Fetch API or another AJAX library to send a DELETE request
+      fetch(`/order/cart/remove-from-cart/${bookId}`, {
+        method: 'DELETE',
+      })
+        .then(response => {
+          if (response.ok) {
+            // Refresh the page or update the UI as needed
+            location.reload(); // This will reload the page; you might want to use a more sophisticated approach
+          } else {
+            console.error('Error removing item from cart:', response.statusText);
+          }
+        })
+        .catch(error => console.error('Error removing item from cart:', error));
+    }
+
 
   </script>
 </body>

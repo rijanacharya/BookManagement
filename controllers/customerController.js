@@ -52,10 +52,12 @@ exports.login = async (req, res) => {
     // req.session.role = customer.role;
     req.session.username = username;
     req.session.userId = customer._id.toString();
+    req.session.role = customer.role;
 
 
     if (customer.role === 'admin') {
-      res.status(200).json({ message: 'Admin login successful' });
+      res.redirect('/admin/books');
+      // res.status(200).json({ message: 'Admin login successful' });
     } else if (customer.role === 'customer') {
       res.redirect('/books');
       // res.status(200).json({ message: 'Customer login successful' });
