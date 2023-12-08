@@ -76,9 +76,38 @@ async function displayAllBooks(req, res) {
       res.status(500).send('Internal Server Error');
     }
   }
+
+  async function addToCart(req, res) {
+    try {
+      const bookId = req.params.bookId;
+      
+      // Find the book by ID
+      const book = await Book.findById(bookId);
+      
+      if (!book) {
+        return res.status(404).json({ error: 'Book not found' });
+      }
+  
+      // Get the customer ID (you need to implement this based on your authentication logic)
+      const customerId = req.user._id;
+  
+      // Create an order or update an existing one
+      let order = await Order.findOneAndUpdate(
+        { customer: customerId, status: 'placed' },
+        { $push: { books: bookId } },
+        { upsert: true, new: true }
+      );
+  
+      res.status(200).json({ message: 'Book added to cart successfully', order });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  }
   
   module.exports = {
     displayAllBooks,
     displayBookDetail,
     postBookReview,
+    addToCart,
   };

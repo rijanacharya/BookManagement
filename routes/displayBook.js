@@ -10,4 +10,6 @@ router.get('/:id', bookController.displayBookDetail);
 
 router.post('/:id/reviews', bookController.postBookReview);
 
+router.post('/orders/add/:bookId', bookController.addToCart);
+
 module.exports = router;

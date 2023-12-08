@@ -4,15 +4,14 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+const ejs = require('ejs');
+const multer = require('multer');
 
 const store = new MongoDBStore({
     uri: 'mongodb://localhost:27017/bookstore',
     collection: 'sessions',
 });
 
-
-const ejs = require('ejs');
-const multer = require('multer');
 // const upload = multer({ dest: './uploads' }); // Specify the destination folder for uploaded files
 
 const app = express();
@@ -77,6 +76,8 @@ app.use('/admin/books', bookRoutes);
 const displaybook = require('./routes/displayBook');
 app.use('/books', displaybook);
 
+const order= require('./routes/orderRoutes');
+app.use('/order',order);
 
 // Start the server
 app.listen(port, () => {
