@@ -14,7 +14,7 @@ cd bookmanagement
 npm install
 ```
 
-##Usage
+## Usage
 To start the application, run the following command:
 ```bash
 npm start
@@ -23,7 +23,7 @@ npm start
 The application will be accessible at http://localhost:3000.
 
 
-##Dependencies
+## Dependencies
 bcrypt: Library for hashing passwords.
 body-parser: Middleware for handling request bodies.
 connect-mongodb-session: MongoDB session store for Express.
@@ -38,5 +38,5 @@ multer: Middleware for handling file uploads.
 path: Utility for working with file and directory paths.
 
 
-##License
+## License
 This project is licensed under the ISC License.
