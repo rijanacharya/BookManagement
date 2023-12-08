@@ -10,71 +10,17 @@ const path = require('path');
 
 // Display list of all books
 exports.index = async function (req, res) {
-  try {
-    // Fetch the book data, for example using Book.find({}...)
-    const books = await Book.find({});
+ 
 
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Book List</title>
-          <!-- Include Bootstrap CSS from CDN -->
-          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      </head>
-      <body>
-          <div class="container">
-              <h1 class="mt-5 mb-4">Book List</h1>
-              <a href="/admin/books/add" class="btn btn-primary mb-3">Add New Book</a>
-              <ul class="list-group">
-                  ${books.map(book => `
-                      <li class="list-group-item">
-                          <h2>${book.title}</h2>
-                          <p>Author: ${book.author}</p>
-                          <p>Details: ${book.details}
-                          <p>Genre: ${book.genre}</p>
-                          <p>Quantity: ${book.quantity}</p>
-                          <p>Price: ${book.price}</p>
-                          <p>Published Date: ${book.publishedDate}</p>
-                          <p>Publisher: ${book.publisher}</p>
-                      
-                          ${book.image ? `<img src="data:${book.image.contentType};base64,${book.image.data}" alt="Book Image" style="max-width: 100px; max-height: 100px;">` : ''}
-                          <button class="btn btn-info" onclick="editBook('${book._id}')">Edit</button>
-                          <button class="btn btn-info" onclick="deleteBook('${book._id}')">Delete</button>
+    try {
+      const books = await Book.find({});
+      res.render('bookList', { books });
+    } catch (error) {
+      console.error('Error fetching book data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
 
-                          </li>
-                  `).join('')}
-              </ul>
-          </div>
-
-          <!-- Include Bootstrap JS (optional) -->
-          <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-          <script>
-              function editBook(bookId) {
-                  // You can redirect to the edit page with the bookId or perform other actions
-                  window.location.href = '/admin/books/edit/' + bookId;
-              }
-              function deleteBook(bookId) {
-                // You can redirect to the edit page with the bookId or perform other actions
-                window.location.href = '/admin/books/delete/' + bookId;
-            }
-          </script>
-      </body>
-      </html>
-  `;
-
-    res.setHeader('Content-Type', 'text/html');
-    res.status(200).send(htmlContent);
-
-  } catch (error) {
-    console.error('Error fetching book data:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
+  
 };
 
 // Display book create form on GET
