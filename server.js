@@ -112,6 +112,12 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/dashboard', (req, res) => {
+  const userData = req.session;
+
+  res.json({ userData });
+});
+
 app.set('view engine', 'ejs'); // Change 'ejs' to your actual view engine if different
 app.set('views', path.join(__dirname, 'views'));
 

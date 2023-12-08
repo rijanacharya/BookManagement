@@ -79,18 +79,26 @@ function logout() {
 
 
 window.onload = function () {
-  var app = document.getElementById('app');
 
-  // Simulating locals.session for testing purposes
-  var locals = { session: { username: 'admin' } };
+  fetchUserData();
 
-  console.log('session:', locals.session);
+}
 
-  if (locals.session && locals.session.username) {
-    // User is logged in
-    app.innerHTML = '<button id="logout-btn" class="btn btn-outline-danger mx-2" onclick="logout()">Logout</button>';
-  } else {
-    // User is not logged in
-    app.innerHTML = '<a href="/login" class="btn btn-outline-success mx-2">Login</a>';
-  }
+function fetchUserData() {
+  fetch('/dashboard')
+    .then(response => response.json())
+    .then(data => {
+      console.log('User data:', data.userData.username);
+
+      var app = document.getElementById('app');
+
+      if (data.userData && data.userData.username) {
+        // User is logged in
+        app.innerHTML = '<button id="logout-btn" class="btn btn-outline-danger mx-2" onclick="logout()">Logout</button>';
+      } else {
+        // User is not logged in
+        app.innerHTML = '<a href="/login" class="btn btn-outline-success mx-2">Login</a>';
+      }
+    })
+    .catch(error => console.error('Error fetching user data:', error));
 }
