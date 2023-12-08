@@ -52,7 +52,6 @@ exports.login = async (req, res) => {
     // req.session.role = customer.role;
     req.session.username = username;
     req.session.userId = customer._id.toString();
-  
 
 
     if (customer.role === 'admin') {

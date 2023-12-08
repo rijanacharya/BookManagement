@@ -1,14 +1,83 @@
 <!-- loginForm.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
   <!-- Include Bootstrap CSS from CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/style/menu.css" />
 </head>
-<body>
+
+<body data-bs-theme="dark">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid navBar">
+      <a class="navbar-brand text-uppercase fa-5x" href="/">
+        <i class="bi bi-infinity fa-5x"></i>Pages</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Custom hamburger menu icon with animation -->
+        <div id="hamburger-menu">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto pl-4 pr-4 mb-2 mb-lg-0 text-uppercase">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/books">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#bestseller">Best Seller</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#faqs">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#contact">Contact</a>
+          </li>
+        </ul>
+        <!--Toggle button-->
+        <div class="form-check form-switch mx-4">
+          <i id="sunIcon" class="bi bi-sun" style="display: none;"></i>
+          <input type="checkbox" class="form-check-input p-2" role="switch" id="flexSwitchCheckChecked" checked
+            onclick="darkMode()" />
+          <i id="moonIcon" class="bi bi-moon"></i>
+        </div>
+        <!--Cart-->
+        <a class="icon-link " href="#"></a>
+        <i class="bi bi-cart3 fa-4x" data-bs-toggle="modal" data-bs-target="#loginModal"
+          onclick="handleCartClick()"></i>
+        </a>
+
+        <!--Search-->
+        <form class="d-flex" onsubmit="searchBooks(event)">
+          <input id="searchTerm" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">
+            Search
+          </button>
+        </form>
+        <!-- Login/Logout Button -->
+        <div class="d-flex1" id="app"></div>
+
+
+
+
+      </div>
+    </div>
+  </nav>
+
   <div class="container">
     <h1 class="mt-5 mb-4">Login</h1>
     <form method="POST" action="/login" class="mb-4">
@@ -29,5 +98,9 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="/script/menu.js"></script>
+  <script src="/script/darkmode.js"></script>
+  <script src="/script/search.js"></script>
 </body>
+
 </html>
