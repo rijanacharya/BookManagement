@@ -217,7 +217,7 @@
             <!-- Add to Cart button -->
             <div class="button-container">
                 <% if (book.quantity> 0) { %>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" class="btn btn-success" onclick="addtocart('<%= book._id%>')">
                         Add to Cart
                     </button>
                     <% if (book.quantity < 5) { %>
@@ -226,7 +226,7 @@
                             <% } else { %>
                                 <% if (book.quantity> -5) { %>
                                     <span class="badge badge-danger">Not avaliable! Check back later.</span>
-                                    <button type="button" class="btn btn-success" disabled>
+                                    <button type="button" class="btn btn-success" disabled">
                                         Add to Cart
                                     </button>
                                     <% } else { %>
@@ -234,7 +234,8 @@
                                         <% } %>
                                             <% } %>
             </div>
-
+   
+            
 
         </div>
         <div class="container review-section">
@@ -288,9 +289,11 @@
 
 
     <!-- Bootstrap JS (Make sure to include jQuery and Popper.js before Bootstrap JS) -->
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<!-- Bootstrap JS (Make sure to include Popper.js before Bootstrap JS) -->
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
     <script src="/script/menu.js"></script>
     <script src="/script/darkmode.js"></script>
@@ -302,6 +305,21 @@
         function navigateToBookDetail(bookId) {
             window.location.href = `/books/${bookId}`;
         }
+
+        function addtocart(bookId){
+            $.ajax({
+    type: 'POST',
+    url: `/addtocart/${bookId}`,
+    success: function (response) {
+      alert(response.message);
+    },
+    error: function (error) {
+      console.error(error);
+      alert('Failed to add book to cart');
+    }
+  });
+          
+}
     </script>
 </body>
 
