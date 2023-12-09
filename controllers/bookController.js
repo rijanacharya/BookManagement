@@ -10,17 +10,17 @@ const path = require('path');
 
 // Display list of all books
 exports.index = async function (req, res) {
- 
 
-    try {
-      const books = await Book.find({});
-      res.render('bookList', { books });
-    } catch (error) {
-      console.error('Error fetching book data:', error);
-      res.status(500).json({ error: 'Internal Server Error' });
-    }
 
-  
+  try {
+    const books = await Book.find({});
+    res.render('bookList', { books });
+  } catch (error) {
+    console.error('Error fetching book data:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+
+
 };
 
 // Display book create form on GET
@@ -119,6 +119,101 @@ exports.editBook = async function (req, res) {
     res.status(500).send('Internal Server Error');
   }
 };
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Handle book delete on GET
 exports.deleteBook = async function (req, res) {
@@ -126,7 +221,8 @@ exports.deleteBook = async function (req, res) {
     const bookId = req.params.id;
 
     // Delete the book from the database
-    await Book.findByIdAndRemove(bookId);
+    await Book.findOneAndDelete({ _id: bookId });
+
 
     res.redirect('/admin/books'); // Redirect to the book list page
   } catch (err) {
