@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "656f87f76a29999155ff87c7"
+  },
+  "username": "john_doe",
+  "password": "password123",
+  "email": "john.doe@example.com",
+  "role": "customer"
+},
+{
+  "_id": {
+    "$oid": "656f87f76a29999155ff87c8"
+  },
+  "username": "jane_smith",
+  "password": "securepass",
+  "email": "jane.smith@example.com",
+  "role": "customer"
+},
+{
+  "_id": {
+    "$oid": "656f87f76a29999155ff87c9"
+  },
+  "username": "admin_user",
+  "password": "adminpass",
+  "email": "admin.user@example.com",
+  "role": "admin"
+},
+{
+  "_id": {
+    "$oid": "656f87f76a29999155ff87ca"
+  },
+  "username": "test_user",
+  "password": "testpass",
+  "email": "test.user@example.com",
+  "role": "customer"
+}]
