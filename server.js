@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const session = require('express-session');
+const cors = require('cors');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const Book = require('./models/book');
 const Cart = require('./models/cart');
@@ -19,7 +20,13 @@ const multer = require('multer');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const corsOptions = {
+  origin: process.env.React_App_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 
+};
+
+app.use(cors(corsOptions));
 // Connect to MongoDB
 
 mongoose.connect('mongodb://localhost:27017/bookstore', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -36,6 +43,7 @@ db.once('open', () => {
 
 // Set up session
 
+
 app.use(bodyParser.json());
 app.use(
   session({
@@ -51,6 +59,7 @@ app.use(
 // Set up middleware
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static('uploads'));
 app.use((req, res, next) => {
@@ -74,6 +83,8 @@ const combinedRoutes = require('./routes/login')(upload);
 app.use('/', combinedRoutes); // Use the combined routes
 
 app.get('/', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
+  res.header('Access-Control-Allow-Credentials', true);
   res.sendFile(__dirname + '/views/index.html', { session: req.session });
 });
 app.get('/admin/books/add', (req, res) => {
