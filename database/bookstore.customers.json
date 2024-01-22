@@ -1,0 +1,40 @@
+[{
+  "_id": {
+    "$oid": "6573c47957f569569bfa8bcd"
+  },
+  "username": "rijan",
+  "password": "rijan123",
+  "email": "rijan@123.com",
+  "role": "admin",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6573c49357f569569bfa8bcf"
+  },
+  "username": "amrit",
+  "password": "amrit123",
+  "email": "amrit@123.com",
+  "role": "customer",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6573c4a557f569569bfa8bd1"
+  },
+  "username": "dipin",
+  "password": "dipin123",
+  "email": "dipin@123.com",
+  "role": "customer",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6573d9ee039d1a016901a5cf"
+  },
+  "username": "ankush",
+  "password": "ankush123",
+  "email": "ankush@g.cm",
+  "role": "customer",
+  "__v": 0
+}]
