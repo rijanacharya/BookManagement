@@ -4,10 +4,12 @@
     "description": "Your MERN Stack App Description",
     "main": "index.js",
     "scripts": {
+        "install": "cd client && npm install && cd ../server && npm install",
         "start": "concurrently \"npm run server\" \"npm run client\"",
         "server": "cd server && nodemon server.js",
         "client": "cd client && npm run dev",
         "test": "echo \"Error: no test specified\" && exit 1"
+        
     },
     "keywords": [
         "mern",

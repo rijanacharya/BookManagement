@@ -15,7 +15,7 @@ async function displayAllBooks(req, res) {
     const books = await Book.find();
 
     // Render a view with all books
-    res.render('allBooks', { books });
+    res.render('combineBooks', { books });
   } catch (error) {
     // Handle errors and send an appropriate response
     console.error(error);
@@ -38,7 +38,9 @@ async function displayBookDetail(req, res) {
     });
 
     // Render a view with the detailed information for the specific book
-    res.render('bookDetail', { book });
+
+    res.render('eachBook', { book });
+
   } catch (error) {
     // Handle errors and send an appropriate response
     console.error(error);
@@ -53,11 +55,15 @@ async function postBookReview(req, res) {
     const { content } = req.body;
 
     // Assuming you have a user authentication system and a user ID available
-    const userId = 'your_user_id_here'; // Replace with the actual user ID
+    const userId = req.session.userId; // Replace with the actual user ID
+    console.log(userId);
+    if (!userId) {
+      return res.status(401).send('User not authenticated');
+    }
 
     // Create a new review
     const newReview = new Review({
-      customer: '656f87f76a29999155ff87c7', // Associate the review with the authenticated user
+      customer: userId, // Associate the review with the authenticated user
       book: bookId,
       content,
     });
@@ -77,6 +83,7 @@ async function postBookReview(req, res) {
   }
 }
 
+
 //   // Handle book search
 
 async function searchBooks(req, res) {
@@ -87,6 +94,7 @@ async function searchBooks(req, res) {
     // Assuming your Book model is called Book and has a 'title' field
     const books = await Book.find({ title: { $regex: new RegExp(searchTerm, 'i') } });
 
+    
 
     res.status(200).json({ results: books });
   } catch (error) {
@@ -94,6 +102,7 @@ async function searchBooks(req, res) {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 
 module.exports = {

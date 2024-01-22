@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Infinite Pages</title>
+  <!-- Bootstrap CSS -->
+  <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style/menu.css" />
+  <link rel="stylesheet" href="style/toTop.css" />
+  <link rel="stylesheet" href="style/accordian.css" />
+</head>
+
+<body data-bs-theme="dark">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid navBar">
+      <a class="navbar-brand text-uppercase fa-5x" href="#">
+        <i class="bi bi-infinity fa-5x"></i>Pages</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Custom hamburger menu icon with animation -->
+        <div id="hamburger-menu">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto pl-4 pr-4 mb-2 mb-lg-0 text-uppercase">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="products.html">Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#bestseller">Best Seller</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#faqs">FAQ</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+        <!--Toggle button-->
+        <div class="form-check form-switch mx-4">
+          <i id="sunIcon" class="bi bi-sun" style="display: none;"></i>
+          <input type="checkbox" class="form-check-input p-2" role="switch" id="flexSwitchCheckChecked" checked
+            onclick="darkMode()" />
+          <i id="moonIcon" class="bi bi-moon"></i>
+        </div>
+        <!--Cart-->
+        <a class="icon-link " href="#"></a>
+        <i class="bi bi-cart3 fa-4x" onclick="handleCartClick()"></i>
+        </a>
+        <!--Search-->
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Products Section -->
+  <div class="container mt-5" id="products">
+    <h1 class="text-uppercase text-center pt-5 mb-5">Products</h1>
+
+    <div class="row">
+      <!-- Genre Accordions (Occupying 35% of the grid) -->
+      <div class="col-md-3">
+        <div class="accordion" id="genreAccordion">
+          <!-- Genre 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenre1">
+                Category
+              </button>
+            </h2>
+            <div id="collapseGenre1" class="accordion-collapse collapse" data-bs-parent="#genreAccordion">
+              <div class="accordion-body">
+                <!-- Add subgenres or other content here -->
+                <ul>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Genre 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenre2">
+                Authors
+              </button>
+            </h2>
+            <div id="collapseGenre2" class="accordion-collapse collapse" data-bs-parent="#genreAccordion">
+              <div class="accordion-body">
+                <!-- Add subgenres or other content here -->
+                <ul>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenre3">
+                Review
+              </button>
+            </h2>
+            <div id="collapseGenre3" class="accordion-collapse collapse" data-bs-parent="#genreAccordion">
+              <div class="accordion-body">
+                <!-- Add subgenres or other content here -->
+                <ul>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGenre4">
+                Price
+              </button>
+            </h2>
+            <div id="collapseGenre4" class="accordion-collapse collapse" data-bs-parent="#genreAccordion">
+              <div class="accordion-body">
+                <!-- Add subgenres or other content here -->
+                <ul>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                  <li><a href="#">Genre 1</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add more genres and subgenres as needed -->
+        </div>
+      </div>
+
+      <!-- Book Cards (Occupying 65% of the grid) -->
+      <div class="col-md-9">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <!-- Book 1 -->
+          <div class="col mb-4">
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+          <!-- Book 2 -->
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+          <!-- Book 3 -->
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <a href="product_details.html" class="card-link">
+              <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+              <div class="card-body">
+                <h5 class="card-title">Ikegai</h5>
+                <p class="card-text">Author: Author Name 1</p>
+                <p class="card-text">Price: $19.99</p>
+                <!-- Add buttons or additional information as needed -->
+
+                <!-- Add to Cart Button (Initially hidden) -->
+                <button class="btn btn-primary explore-btn">Add to Cart</button>
+              </div>
+            </a>
+          </div>
+
+          <div class="col mb-4">
+            <!-- Similar card structure as Book 1 -->
+            <div class="card">
+              <!-- Card content -->
+              <a href="product_details.html" class="card-link">
+                <img src="images/Ikegai.jpg" class="card-img-top" alt="Ikegai_image">
+                <div class="card-body">
+                  <h5 class="card-title">Ikegai</h5>
+                  <p class="card-text">Author: Author Name 1</p>
+                  <p class="card-text">Price: $19.99</p>
+                  <!-- Add buttons or additional information as needed -->
+
+                  <!-- Add to Cart Button (Initially hidden) -->
+                  <button class="btn btn-primary explore-btn">Add to Cart</button>
+                </div>
+              </a>
+            </div>
+          </div>
+          <!-- Add more book cards as needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top-btn" class="toTop-btn" title="Go to top">
+    <i class="bi bi-airplane"></i>
+  </button>
+
+  <!-- Footer -->
+  <footer class="text-center py-3">
+    &copy; RADAM Book. All rights reserved.
+  </footer>
+
+
+
+  <!-- Bootstrap JS (Make sure to include jQuery and Popper.js before Bootstrap JS) -->
+  <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="script/menu.js"></script>
+  <script src="script/darkmode.js"></script>
+  <script src="script/accordian.js"></script>
+  <script src="script/toTop.js"></script>
+</body>
+
+</html>

@@ -1,36 +1,40 @@
 [{
   "_id": {
-    "$oid": "656f87f76a29999155ff87c7"
+    "$oid": "6573c47957f569569bfa8bcd"
   },
-  "username": "john_doe",
-  "password": "password123",
-  "email": "john.doe@example.com",
-  "role": "customer"
+  "username": "rijan",
+  "password": "rijan123",
+  "email": "rijan@123.com",
+  "role": "admin",
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "656f87f76a29999155ff87c8"
+    "$oid": "6573c49357f569569bfa8bcf"
   },
-  "username": "jane_smith",
-  "password": "securepass",
-  "email": "jane.smith@example.com",
-  "role": "customer"
+  "username": "amrit",
+  "password": "amrit123",
+  "email": "amrit@123.com",
+  "role": "customer",
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "656f87f76a29999155ff87c9"
+    "$oid": "6573c4a557f569569bfa8bd1"
   },
-  "username": "admin_user",
-  "password": "adminpass",
-  "email": "admin.user@example.com",
-  "role": "admin"
+  "username": "dipin",
+  "password": "dipin123",
+  "email": "dipin@123.com",
+  "role": "customer",
+  "__v": 0
 },
 {
   "_id": {
-    "$oid": "656f87f76a29999155ff87ca"
+    "$oid": "6573d9ee039d1a016901a5cf"
   },
-  "username": "test_user",
-  "password": "testpass",
-  "email": "test.user@example.com",
-  "role": "customer"
+  "username": "ankush",
+  "password": "ankush123",
+  "email": "ankush@g.cm",
+  "role": "customer",
+  "__v": 0
 }]

@@ -25,27 +25,26 @@
     <ul class="list-unstyled d-flex flex-wrap" id="bookList">
       <!-- Books will be dynamically added here -->
       <% books.forEach(book=> { %>
-        <% console.log(book) %>
-          <li class="m-2">
-            <div class="card" style="height: fit-content; width: fit-content;">
-              <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>" alt="<%= book.title %>"
-                class="card-img-top" style="cursor: pointer; height: 150px;"
-                onclick="navigateToBookDetail('<%= book._id %>')">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <%= book.title %>
-                </h5>
-                <p class="card-text">Price: $<%= book.price.toFixed(2) %>
-                </p>
-                <% if (book.quantity> 0) { %>
-                  <p class="card-text text-success">In Stock</p>
-                  <% } else { %>
-                    <p class="card-text text-danger">Out of Stock</p>
-                    <% } %>
-              </div>
+        <li class="m-2">
+          <div class="card" style="height: fit-content; width: fit-content;">
+            <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>" alt="<%= book.title %>"
+              class="card-img-top" style="cursor: pointer; height: 150px;"
+              onclick="navigateToBookDetail('<%= book._id %>')">
+            <div class="card-body">
+              <h5 class="card-title">
+                <%= book.title %>
+              </h5>
+              <p class="card-text">Price: $<%= book.price.toFixed(2) %>
+              </p>
+              <% if (book.quantity> 0) { %>
+                <p class="card-text text-success">In Stock</p>
+                <% } else { %>
+                  <p class="card-text text-danger">Out of Stock</p>
+                  <% } %>
             </div>
-          </li>
-          <% }); %>
+          </div>
+        </li>
+        <% }); %>
     </ul>
   </div>
 
