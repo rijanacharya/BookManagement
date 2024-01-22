@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= book.title %>
+  </title>
+
+  <!-- Include Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .badge {
+      font-size: 1.2rem;
+      margin-right: 10px;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .badge-warning {
+      background-color: #ffc107;
+      color: #212529;
+    }
+
+    .badge-danger {
+      background-color: #dc3545;
+      color: #fff;
+    }
+
+    .btn-success {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-success:hover {
+      background-color: #218838;
+    }
+
+    .btn:disabled,
+    .btn[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    body {
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: #007bff;
+    }
+
+    .book-details {
+      margin-bottom: 30px;
+    }
+
+    .book-details img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .review-section {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .review-item {
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+
+    .user-icon {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>" alt="<%= book.title %>"
+          class="img-fluid">
+      </div>
+      <div class="col-md-6">
+        <div class="book-details">
+          <h1>
+            <%= book.title %>
+          </h1>
+          <p><strong>Author:</strong>
+            <%= book.author %>
+          </p>
+          <p><strong>Details:</strong>
+            <%= book.details %>
+          </p>
+          <p><strong>Genre:</strong>
+            <%= book.genre %>
+          </p>
+          <p><strong>Price:</strong> $<%= book.price.toFixed(2) %>
+          </p>
+          <p><strong>Published Date:</strong>
+            <%= book.publishedDate %>
+          </p>
+          <p><strong>Publisher:</strong>
+            <%= book.publisher %>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add to Cart button -->
+    <div class="button-container">
+      <% if (book.quantity> 0) { %>
+        <button type="button" class="btn btn-success">
+          Add to Cart
+        </button>
+        <% if (book.quantity < 5) { %>
+          <span class="badge badge-warning">Hurry!! Only <%= book.quantity %> book left in stock.</span>
+          <% } %>
+            <% } else { %>
+              <% if (book.quantity> -5) { %>
+                <span class="badge badge-danger">Not avaliable! Check back later.</span>
+                <button type="button" class="btn btn-success" disabled>
+                  Add to Cart
+                </button>
+                <% } else { %>
+                  <span class="badge badge-danger">Out of stock</span>
+                  <% } %>
+                    <% } %>
+    </div>
+
+
+  </div>
+  <div class="container review-section">
+    <!-- Form for posting a new review -->
+    <form action="/books/<%= book._id %>/reviews" method="POST">
+      <div class="form-group">
+        <label for="reviewContent">Write a Review:</label>
+        <textarea class="form-control" id="reviewContent" name="content" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Post Review</button>
+    </form>
+  </div>
+
+  <!-- Display all reviews in a separate section -->
+  <div class="container review-section">
+    <h2>Reviews</h2>
+    <% book.reviews.forEach(review=> { %>
+      <div class="review-item media">
+        <img src="/uploads/icon.jpeg" class="user-icon" alt="User Icon">
+        <div class="media-body">
+          <h5 class="mt-0">
+            <%= review.customer.username %>
+          </h5>
+          <p>
+            <%= review.content %>
+          </p>
+        </div>
+      </div>
+      <% }); %>
+  </div>
+
+
+  <!-- Include Bootstrap JS and Popper.js before the closing body tag -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

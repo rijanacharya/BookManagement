@@ -1,0 +1,149 @@
+<!-- views/bookList.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/style/menu.css" />
+    <link rel="stylesheet" type="text/css" href="/style/faq.css" />
+    <link rel="stylesheet" type="text/css" href="/style/contact.css" />
+    <link rel="stylesheet" type="text/css" href="/style/toTop.css" />
+</head>
+
+<body data-bs-theme="dark">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid navBar">
+            <a class="navbar-brand text-uppercase fa-5x" href="/">
+                <i class="bi bi-infinity fa-5x"></i>Pages</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <!-- Custom hamburger menu icon with animation -->
+                <div id="hamburger-menu">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto pl-4 pr-4 mb-2 mb-lg-0 text-uppercase">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/books">Products</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#faqs">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/#contact">Contact</a>
+                    </li>
+                </ul>
+                <!--Toggle button-->
+                <div class="form-check form-switch mx-4">
+                    <i id="sunIcon" class="bi bi-sun" style="display: none;"></i>
+                    <input type="checkbox" class="form-check-input p-2" role="switch" id="flexSwitchCheckChecked"
+                        checked onclick="darkMode()" />
+                    <i id="moonIcon" class="bi bi-moon"></i>
+                </div>
+                <!--Cart-->
+                <a class="icon-link " href="/order/cart">
+                    <i class="bi bi-cart3 fa-4x"></i>
+                </a>
+
+                <!--Search-->
+                <form class="d-flex" onsubmit="searchBooks(event)">
+                    <input id="searchTerm" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="Search" />
+                    <button class="btn btn-outline-success" type="submit">
+                        Search
+                    </button>
+                </form>
+                <!-- Login/Logout Button -->
+                <div class="d-flex1">
+                    <% console.log('session:', locals.session); %>
+                        <% if (locals.session && locals.session.username) { %>
+                            <!-- User is logged in -->
+                            <button id="logout-btn" class="btn btn-outline-danger mx-2"
+                                onclick="logout()">Logout</button>
+                            <% } else { %>
+                                <!-- User is not logged in -->
+                                <a href="/login" class="btn btn-outline-success mx-2">Login</a>
+                                <% } %>
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-5 mb-4">Book List</h1>
+        <a href="/admin/books/add" class="btn btn-primary mb-3">Add New Book</a>
+        <ul class="list-group">
+            <% books.forEach(book=> { %>
+                <li class="list-group-item">
+                    <h2>
+                        <%= book.title %>
+                    </h2>
+                    <p>Author: <%= book.author %>
+                    </p>
+                    <p>Details: <%= book.details %>
+                    </p>
+                    <p>Genre: <%= book.genre %>
+                    </p>
+                    <p>Quantity: <%= book.quantity %>
+                    </p>
+                    <p>Price: <%= book.price %>
+                    </p>
+                    <p>Published Date: <%= book.publishedDate %>
+                    </p>
+                    <p>Publisher: <%= book.publisher %>
+                    </p>
+
+                    <% if (book.image) { %>
+                        <img src="data:<%= book.image.contentType %>;base64,<%= book.image.data %>" alt="Book Image"
+                            style="max-width: 100px; max-height: 100px;">
+                        <% } %>
+                            <button class="btn btn-info" onclick="editBook('<%= book._id %>')">Edit</button>
+                            <button class="btn btn-info" onclick="deleteBook('<%= book._id %>')">Delete</button>
+                </li>
+                <% }); %>
+        </ul>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="/script/menu.js"></script>
+    <script src="/script/darkmode.js"></script>
+    <script src="/script/toTop.js"></script>
+    <script src="/script/search.js"></script>
+    <script>
+        function editBook(bookId) {
+            // You can redirect to the edit page with the bookId or perform other actions
+            window.location.href = '/admin/books/edit/' + bookId;
+        }
+        function deleteBook(bookId) {
+            // You can redirect to the edit page with the bookId or perform other actions
+            window.location.href = '/admin/books/delete/' + bookId;
+        }
+    </script>
+</body>
+
+</html>

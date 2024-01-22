@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: green;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Order Placed Successfully!</h1>
+    <p>Thank you for your purchase.</p>
+    <button onclick="redirectToHome()">Go to Home Page</button>
+
+    <script>
+        function redirectToHome() {
+            // Redirect to the home page
+            window.location.href = '/books';
+        }
+    </script>
+</body>
+
+</html>
